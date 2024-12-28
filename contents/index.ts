@@ -22,7 +22,7 @@ chrome.storage.local.get("allDomains", (result) => {
 
 function run(jsScript, cssStyle){
     let style = document.createElement("style");
-    style.innerText = cssStyle;
+    style.textContent = cssStyle;
     console.log("style: " , style);
     document.body.appendChild(style);
    setTimeout(jsScript, 1000)
