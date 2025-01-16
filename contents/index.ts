@@ -24,6 +24,6 @@ function run(jsScript, cssStyle){
     let style = document.createElement("style");
     style.textContent = cssStyle;
     console.log("style: " , style);
-    document.body.appendChild(style);
-   setTimeout(jsScript, 1000)
+    document.head.appendChild(style);
+   setTimeout(jsScript, 5000)
 }

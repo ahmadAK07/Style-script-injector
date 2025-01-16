@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { saveDomainName, getDomains, delDomain, saveStyleAndScript, getStylesAndScript } from '~utitls/helping';
 import { MdDelete } from "react-icons/md";
 import { FaCode } from "react-icons/fa";
-import "./styles.css";
+import Model from "~Components/Model"
+import "./styles.css"
 const index = () => {
     let [domainName, setDomainName] = useState('')
     let [styles, setStyles] = useState('');
     let [script, setScript] = useState('');
    let [domainList, setDomainList] = useState([]);
-
+   let [showModal, setShowModal] = useState(false);
+   let [domainToDelete, setDomainToDelete] = useState('');
     let handleSave = async () => {
       if(domainName !== '' && styles !== '' || script !== '') {
        try {
@@ -70,11 +72,16 @@ const index = () => {
       </div>
       <ul className='domainList'>
       {domainList.map((domain, index) => (
-          <li  key={index}>{ domain } <button className="del-btn btn" onClick={() => {delDomain(domain.trim(), setDomainList);}}><MdDelete /></button>
+          <li  key={index}>{ domain } <button className="del-btn btn"
+          //  onClick={() => {delDomain(domain.trim(), setDomainList);}}
+           onClick={() => {setDomainToDelete(domain); setShowModal(true)}}
+           ><MdDelete /></button>
           <button className='btn update-btn' onClick={() => handleUpdate(domain)}><FaCode /></button>
           </li>
         ))}
         </ul> 
+
+        {showModal && <Model setDomainList={setDomainList} domainToDelete={domainToDelete} setShowModal={setShowModal} />}
     </div>
   )
 }
